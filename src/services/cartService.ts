@@ -121,3 +121,52 @@ export const updateItemInCart = async ({
 
   return { data: updatedCart, statusCode: 200 };
 };
+
+interface DeleteItemInCart {
+  productId: any;
+  userId: string;
+}
+
+export const deleteItemInCart = async ({
+  userId,
+  productId,
+}: DeleteItemInCart) => {
+  const cart = await getActiveCartForUser({ userId });
+
+  const existsInCart = await cart.items.find(
+    (p) => p.product.toString() === productId
+  );
+
+  if (!existsInCart) {
+    return { data: "Item does not exist in cart", statusCode: 400 };
+  }
+
+  const otherCartItems = cart.items.filter(
+    (p) => p.product.toString() !== productId
+  );
+
+  const total = otherCartItems.reduce((sum, product) => {
+    sum += product.quantity * product.unitPrice;
+    return sum;
+  }, 0);
+
+  cart.items = otherCartItems;
+  cart.totalAmount = total;
+
+  const updatedCart = await cart.save();
+
+  return { data: updatedCart, statusCode: 200 };
+};
+
+interface ClearCart {
+  userId: string;
+}
+
+export const clearCart = async ({ userId}: ClearCart) => {
+  const cart = await getActiveCartForUser({userId});
+  cart.items = [];
+  cart.totalAmount = 0;
+
+  const updateCart = await cart.save();
+  return {data: updateCart, stausCode: 200};
+}
