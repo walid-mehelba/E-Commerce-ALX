@@ -14,6 +14,20 @@ export const seedInitialProducts = async () => {
         price: 15000,
         stock: 10,
       },
+      {
+        title: "Asus Laptop",
+        image:
+          "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRbuN48I0ndj6X2JrxdEnRkiqwNX2eS-QyF2R6-iox01yPp9nAk6Tb3u6TflNfK2wmuKnnZZHI53TLjQKA8m9NrjGVHWaoGeJyaDPwj5FK0llQWG2UwgMA3KBwVgNcXeXRhc_Augw&usqp=CAc",
+        price: 15000,
+        stock: 10,
+      },
+      {
+        title: "HP Laptop",
+        image:
+          "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSLdLJdY7AAGPEgGSDY-I_3sWfyqTXxYzRC-D0JZ-2XWgT93oLpBKhSwA0KTKEJoIsSoFJuA8KpWL_YBA3YJgAxrBmSW4-cXWLQNzoOveGYbALTHTkP00vWW6hpBl7HX-26_fJ0-DEVOYU&usqp=CAc",
+        price: 15000,
+        stock: 10,
+      },
     ];
 
     const existingProducts = await getAllProducts();
