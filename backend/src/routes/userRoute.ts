@@ -9,7 +9,7 @@ router.post("/register", async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
     const result = await register({ firstName, lastName, email, password });
     if (result) {
-      res.status(result.statusCode).send(result.data);
+      res.status(result.statusCode).json(result.data);
     } else {
       res.status(500).send({ error: "Registration failed." });
     }
@@ -23,7 +23,7 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const { statusCode, data } = await login({ email, password });
-    res.status(statusCode).send(data);
+    res.status(statusCode).json(data);
   } catch {
     res.status(500).send("Something went wrong");
   }
