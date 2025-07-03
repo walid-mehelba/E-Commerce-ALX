@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 import RegisterPage from "./pages/RegisterPage";
 import AuthProvider from "./context/Auth/AuthProvider";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -23,6 +24,14 @@ function App() {
             element={
               <>
                 <RegisterPage />
+              </>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <>
+                <LoginPage />
               </>
             }
           />
