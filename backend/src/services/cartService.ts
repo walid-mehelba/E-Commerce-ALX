@@ -51,7 +51,7 @@ export const addItemToCart = async ({
   const cart = await getActiveCartForUser({ userId });
 
   const existsInCart = await cart.items.find(
-    (p) => p.product.toString() === productId
+    (p) => p.product.toString() === productId.toString()
   );
 
   if (existsInCart) {
