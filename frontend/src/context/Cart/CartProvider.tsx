@@ -2,7 +2,6 @@ import { useEffect, useState, type FC, type PropsWithChildren } from "react";
 import { CartContext } from "./CartContext";
 import type { CartItem } from "../../types/CartItem";
 import { useAuth } from "../Auth/AuthContext";
-import { clearCart } from '../../../../backend/src/services/cartService';
 
 
 const CartProvider: FC<PropsWithChildren> = ({ children }) => {
