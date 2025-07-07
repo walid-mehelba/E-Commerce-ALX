@@ -8,6 +8,7 @@ import CartPage from "./pages/CartPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CartProvider from "./context/Cart/CartProvider";
 import CheckoutPage from "./pages/CheckoutPage";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
 
 function App() {
   return (
@@ -54,6 +55,14 @@ function App() {
                 element={
                   <>
                     <CheckoutPage />
+                  </>
+                }
+              />
+              <Route
+                path="/order-success"
+                element={
+                  <>
+                    <OrderSuccessPage />
                   </>
                 }
               />
