@@ -2,16 +2,28 @@ import { Box, Container, Typography } from "@mui/material";
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useCart } from "../context/Cart/CartContext";
-import { PriceCheckOutlined } from "@mui/icons-material";
+
 
 const CartPage = () => {
-    const { cartItems, totalAmount, error } = useCart();
+    const { cartItems, totalAmount, updateItemInCart, removeItemInCart } = useCart();
+
+    const handleQuantity = (productId: string, quantity: number) => {
+        if (quantity <= 0) {
+            return;
+        }
+        updateItemInCart(productId, quantity)
+    }
+
+    const handleRemoveItem = (productId: string) => {
+        removeItemInCart(productId)
+    }
+
+
 
     return (
         <Container sx={{ mt: 2 }}>
             <Typography variant="h4">My Cart</Typography>
             <Box display="flex" flexDirection="column" gap={4} mt={4}>
-                {error && <p style={{ color: "red" }}>{error}</p>}
                 {cartItems.length === 0 ? (
                     <p>Your cart is empty.</p>
                 ) : (
@@ -28,12 +40,12 @@ const CartPage = () => {
                                 <Box>
                                     <Typography variant="h5">{item.title}</Typography>
                                     <Typography>{item.quantity} x {item.unitPrice} EGP</Typography>
-                                    <Button>Remove Item</Button>
+                                    <Button onClick={() => handleRemoveItem(item.productId)}>Remove Item</Button>
                                 </Box>
                             </Box>
                             <ButtonGroup variant="contained" aria-label="Basic button group">
-                                <Button>-</Button>
-                                <Button>+</Button>
+                                <Button onClick={() => handleQuantity(item.productId, item.quantity - 1)}>-</Button>
+                                <Button onClick={() => handleQuantity(item.productId, item.quantity + 1)}>+</Button>
                             </ButtonGroup>
                         </Box>
                     ))
