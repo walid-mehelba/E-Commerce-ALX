@@ -5,7 +5,7 @@ import { useCart } from "../context/Cart/CartContext";
 
 
 const CartPage = () => {
-    const { cartItems, totalAmount, updateItemInCart, removeItemInCart } = useCart();
+    const { cartItems, totalAmount, updateItemInCart, removeItemInCart, clearCart } = useCart();
 
     const handleQuantity = (productId: string, quantity: number) => {
         if (quantity <= 0) {
@@ -22,7 +22,10 @@ const CartPage = () => {
 
     return (
         <Container sx={{ mt: 2 }}>
-            <Typography variant="h4">My Cart</Typography>
+            <Box display="flex" flexDirection="row" justifyContent="space-between">
+                <Typography variant="h4">My Cart</Typography>
+                <Button onClick={() => clearCart()}>Clear Cart</Button>
+            </Box>
             <Box display="flex" flexDirection="column" gap={4} mt={4}>
                 {cartItems.length === 0 ? (
                     <p>Your cart is empty.</p>

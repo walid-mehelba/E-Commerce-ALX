@@ -2,6 +2,7 @@ import { useEffect, useState, type FC, type PropsWithChildren } from "react";
 import { CartContext } from "./CartContext";
 import type { CartItem } from "../../types/CartItem";
 import { useAuth } from "../Auth/AuthContext";
+import { clearCart } from '../../../../backend/src/services/cartService';
 
 
 const CartProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -47,12 +48,6 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
 
     const addItemToCart = async (productId: string) => {
         try {
-
-            console.log("Token in addItemToCart:", token);
-
-            console.log("Calling backend to add item to cart with productId:", productId);
-
-
             const response = await fetch("http://localhost:3001/cart/items", {
                 method: "POST",
                 headers: {
@@ -65,18 +60,9 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
                 }),
             });
 
-
-
-
-            const data = await response.json();
-            console.log("Response status:", response.status);
-            console.log("Response data:", data);
-
             if (!response.ok) {
                 // detailed error message from backend
-                setError(data || "Failed to add to cart");
-                console.error("Error adding to cart:", data);
-                return;
+                setError("Failed to add to cart");
             }
 
             const cart = await response.json();
@@ -98,10 +84,8 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
 
             setCartItems([...cartItemsMapped]);
             setTotalAmount(cart.totalAmount);
-            setError("")
         } catch (error) {
             console.error("Exception in addItemToCart:", error);
-            setError("Something went wrong, please try again.");
         }
     };
 
@@ -187,8 +171,37 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         }
     }
 
+    const clearCart = async () => {
+        try {
+
+            const response = await fetch(`http://localhost:3001/cart/`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                setError("Failed to empty cart");
+            }
+
+            const cart = await response.json();
+
+            if (!cart) {
+                setError("Failed to retrieve cart data");
+            }
+
+
+
+            setCartItems([]);
+            setTotalAmount(0);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
-        <CartContext.Provider value={{ cartItems, totalAmount, addItemToCart, updateItemInCart, removeItemInCart }}>
+        <CartContext.Provider value={{ cartItems, totalAmount, addItemToCart, updateItemInCart, removeItemInCart, clearCart }}>
             {children}
         </CartContext.Provider>
     );
