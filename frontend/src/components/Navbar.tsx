@@ -17,7 +17,7 @@ import { ShoppingCart } from "@mui/icons-material";
 import { useCart } from "../context/Cart/CartContext";
 
 function Navbar() {
-  const { username, isAuthenticated, logout } = useAuth();
+   const { username, isAuthenticated, logout } = useAuth();
   const { cartItems } = useCart();
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -36,6 +36,11 @@ function Navbar() {
   const handleLogin = () => {
     navigate("/login");
   };
+
+  const handeMyOrders = () => {
+    navigate("/my-orders");
+    handleCloseUserMenu();
+  }
 
   const handleLogout = () => {
     logout();
@@ -144,7 +149,7 @@ function Navbar() {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                   >
-                    <MenuItem onClick={handleCloseUserMenu}>
+                    <MenuItem onClick={handeMyOrders}>
                       <Typography sx={{ textAlign: "center" }}>
                         My Orders
                       </Typography>

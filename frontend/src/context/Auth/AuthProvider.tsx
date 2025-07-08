@@ -12,6 +12,8 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     localStorage.getItem(TOKEN_KEY)
   );
 
+  const [myOrders, setMyOrders] = useState([]);
+
   const isAuthenticated = !!token;
 
   const login = (username: string, token: string) => {
@@ -21,6 +23,7 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     localStorage.setItem(TOKEN_KEY, token);
   };
 
+
   const logout = () => {
     localStorage.removeItem(USERNAME_KEY);
     localStorage.removeItem(TOKEN_KEY);
@@ -28,10 +31,25 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     setToken(null);
   };
 
+
+  const getMyOrders = async () => {
+    const response = await fetch("http://localhost:3001/user/my-orders", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) return;
+
+    const data = await response.json();
+    setMyOrders(data);
+  }
+
   return (
     <AuthContext.Provider
-      value={{ username, token, login, logout, isAuthenticated }}
+      value={{ username, token,myOrders, login, logout, isAuthenticated, getMyOrders }}
     >
+
       {children}
     </AuthContext.Provider>
   );

@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import CartProvider from "./context/Cart/CartProvider";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
+import MyOrdersPage from "./pages/MyOrdersPage";
 
 function App() {
   return (
@@ -63,6 +64,14 @@ function App() {
                 element={
                   <>
                     <OrderSuccessPage />
+                  </>
+                }
+              />
+              <Route
+                path="/my-orders"
+                element={
+                  <>
+                    <MyOrdersPage />
                   </>
                 }
               />
