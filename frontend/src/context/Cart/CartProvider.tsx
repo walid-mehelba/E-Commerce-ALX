@@ -8,6 +8,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     const { token } = useAuth();
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [totalAmount, setTotalAmount] = useState<number>(0);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -18,7 +19,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
 
             const response = await fetch("http://localhost:3001/cart", {
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
 
@@ -51,7 +52,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     productId,
@@ -95,7 +96,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     productId,
@@ -138,7 +139,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
             const response = await fetch(`http://localhost:3001/cart/items/${productId}`, {
                 method: "DELETE",
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
 
@@ -199,8 +200,37 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         }
     }
 
+    const fetchCart = async () => {
+        const response = await fetch("http://localhost:3001/cart", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (!response.ok) {
+            setError("Failed to fetch user cart, Please try again");
+            return;
+        }
+
+        const cart = await response.json();
+
+        const cartItemsMapped = cart.items.map(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ({ product, quantity, unitPrice }: { product: any; quantity: number; unitPrice: number }) => ({
+                productId: product._id,
+                title: product.title,
+                image: product.image,
+                quantity,
+                unitPrice
+            })
+        );
+
+        setCartItems(cartItemsMapped);
+        setTotalAmount(cart.totalAmount);
+    };
+
     return (
-        <CartContext.Provider value={{ cartItems, totalAmount, addItemToCart, updateItemInCart, removeItemInCart, clearCart }}>
+        <CartContext.Provider value={{ cartItems, totalAmount, addItemToCart, updateItemInCart, removeItemInCart, clearCart, fetchCart }}>
             {children}
         </CartContext.Provider>
     );

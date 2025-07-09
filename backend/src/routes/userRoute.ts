@@ -36,7 +36,8 @@ router.get("/my-orders", validateJWT, async (req: ExtendRequest, res) => {
     const userId = req?.user?._id;
     const { statusCode, data } = await getMyOrders({ userId });
     res.status(statusCode).send(data);
-  } catch {
+  } catch (err) {
+    console.error("Error fetching orders:", err);
     res.status(500).send("Something went wrong");
   }
 });

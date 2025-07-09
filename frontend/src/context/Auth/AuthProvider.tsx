@@ -12,6 +12,8 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     localStorage.getItem(TOKEN_KEY)
   );
 
+  console.log("Token in AuthProvider:", token);
+
   const [myOrders, setMyOrders] = useState([]);
 
   const isAuthenticated = !!token;

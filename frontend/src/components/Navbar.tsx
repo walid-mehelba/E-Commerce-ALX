@@ -9,12 +9,12 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { useAuth } from "../context/Auth/AuthContext";
 import { Badge, Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart } from "@mui/icons-material";
 import { useCart } from "../context/Cart/CartContext";
+import LaptopWindowsIcon from '@mui/icons-material/LaptopWindows';
 
 function Navbar() {
   const { email, isAuthenticated, logout } = useAuth();
@@ -24,6 +24,7 @@ function Navbar() {
   );
 
   const navigate = useNavigate();
+
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -87,7 +88,7 @@ function Navbar() {
                   alignItems: "center",
                 }}
               >
-                <AdbIcon sx={{ display: "flex", mr: 1 }} />
+                <LaptopWindowsIcon sx={{ display: "flex", mr: 1 }} />
                 <Typography
                   variant="h6"
                   noWrap
@@ -192,6 +193,8 @@ function Navbar() {
         </Toolbar>
       </Container>
     </AppBar>
+
+
   );
 }
 export default Navbar;

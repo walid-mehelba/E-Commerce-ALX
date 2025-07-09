@@ -50,8 +50,8 @@ export const addItemToCart = async ({
 }: AddItemToCart) => {
   const cart = await getActiveCartForUser({ userId });
 
-  const existsInCart = await cart.items.find(
-    (p) => p.product.toString() === productId.toString()
+  const existsInCart = cart.items.find(
+    (p) => p.product.toString() === productId
   );
 
   if (existsInCart) {
@@ -97,7 +97,7 @@ export const updateItemInCart = async ({
 }: UpdateItemInCart) => {
   const cart = await getActiveCartForUser({ userId });
 
-  const existsInCart = await cart.items.find(
+  const existsInCart = cart.items.find(
     (p) => p.product.toString() === productId
   );
 
@@ -149,7 +149,7 @@ export const deleteItemInCart = async ({
 }: DeleteItemInCart) => {
   const cart = await getActiveCartForUser({ userId });
 
-  const existsInCart = await cart.items.find(
+  const existsInCart = cart.items.find(
     (p) => p.product.toString() === productId
   );
 

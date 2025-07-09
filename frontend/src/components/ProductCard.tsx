@@ -17,7 +17,7 @@ interface Props {
 export default function ProductCard({ _id, title, image, price, description }: Props) {
   const { addItemToCart } = useCart();
   return (
-    <Card sx={{ maxWidth: 345, height: 500, padding: 1, backgroundColor: "#C1C2BE" }}>
+    <Card sx={{ maxWidth: 345, height: 500, padding: 1, backgroundColor: "#E0E1DD" }}>
       <CardMedia sx={{ height: 200, objectFit: "cover" }} image={image} title="Product Image" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: 600 }}>
