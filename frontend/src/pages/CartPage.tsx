@@ -96,7 +96,7 @@ const CartPage = () => {
                                     },
                                 }} onClick={handleCheckout}>Checkout</Button>
                         </Box>
-                        <Button sx={{color: "#003F88"}} onClick={() => clearCart()} variant="outlined" startIcon={<DeleteIcon />}>Clear Cart</Button>
+                        <Button sx={{ color: "#003F88" }} onClick={() => clearCart()} variant="outlined" startIcon={<DeleteIcon />}>Clear Cart</Button>
                     </Box>
                 </Box>
             </Container>

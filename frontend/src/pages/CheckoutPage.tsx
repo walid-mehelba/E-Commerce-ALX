@@ -84,7 +84,7 @@ const CheckoutPage = () => {
                             boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
                             transform: "translateY(-2px)",
                         },
-                    }} onClick={handleConfirmOrder} > Pay Now</Button>
+                    }} onClick={handleConfirmOrder} >Pay Now</Button>
                 </Box>
             </Box>
 
