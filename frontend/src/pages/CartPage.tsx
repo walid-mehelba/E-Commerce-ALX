@@ -63,8 +63,14 @@ const CartPage = () => {
                                     </Box>
                                 </Box>
                                 <ButtonGroup variant="contained" aria-label="Basic button group">
-                                    <Button onClick={() => handleQuantity(item.productId, item.quantity - 1)}>-</Button>
-                                    <Button onClick={() => handleQuantity(item.productId, item.quantity + 1)}>+</Button>
+                                    <Button sx={{
+                                        backgroundColor: "#003F88",
+                                        color: "#FFD500",
+                                    }} onClick={() => handleQuantity(item.productId, item.quantity - 1)}>-</Button>
+                                    <Button sx={{
+                                        backgroundColor: "#003F88",
+                                        color: "#FFD500",
+                                    }} onClick={() => handleQuantity(item.productId, item.quantity + 1)}>+</Button>
                                 </ButtonGroup>
                             </Box>
                         ))
@@ -74,9 +80,23 @@ const CartPage = () => {
                             <Typography variant="h4">
                                 Total Amount: {totalAmount} EGP
                             </Typography>
-                            <Button variant="contained" onClick={handleCheckout}>Checkout</Button>
+                            <Button variant="contained"
+                                sx={{
+                                    mb: 1,
+                                    backgroundColor: "#003F88",
+                                    color: "#FFD500",
+                                    borderRadius: 2,
+                                    textTransform: "none",
+                                    fontWeight: 600,
+                                    boxShadow: "none",
+                                    transition: "all 0.2s ease",
+                                    "&:hover": {
+                                        boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                                        transform: "translateY(-2px)",
+                                    },
+                                }} onClick={handleCheckout}>Checkout</Button>
                         </Box>
-                        <Button onClick={() => clearCart()} variant="outlined" startIcon={<DeleteIcon />}>Clear Cart</Button>
+                        <Button sx={{color: "#003F88"}} onClick={() => clearCart()} variant="outlined" startIcon={<DeleteIcon />}>Clear Cart</Button>
                     </Box>
                 </Box>
             </Container>

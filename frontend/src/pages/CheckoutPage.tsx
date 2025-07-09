@@ -70,11 +70,25 @@ const CheckoutPage = () => {
                     <Typography variant="h5">
                         Total Amount: {totalAmount} EGP
                     </Typography>
-                    <Button variant="contained" sx={{ mt: 1, width: "300px" }} onClick={handleConfirmOrder} >Pay Now</Button>
+                    <Button sx={{
+                        width: "300px",
+                        mb: 1,
+                        backgroundColor: "#003F88",
+                        color: "#FFD500",
+                        borderRadius: 2,
+                        textTransform: "none",
+                        fontWeight: 600,
+                        boxShadow: "none",
+                        transition: "all 0.2s ease",
+                        "&:hover": {
+                            boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                            transform: "translateY(-2px)",
+                        },
+                    }} onClick={handleConfirmOrder} > Pay Now</Button>
                 </Box>
             </Box>
 
-        </Container>
+        </Container >
     );
 };
 
