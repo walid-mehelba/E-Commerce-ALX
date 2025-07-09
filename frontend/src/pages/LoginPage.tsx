@@ -53,15 +53,16 @@ const LoginPage = () => {
     return (
         <Container>
             <Box
+                maxWidth="xs"
                 sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignContent: "center",
-                    mt: 4,
+                    mt: 10,
+                    p: 4,
+                    borderRadius: 3,
+                    boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+                    backgroundColor: "white",
                 }}
             >
-                <Typography variant="h6">Login</Typography>
+                <Typography variant="h5" gutterBottom sx={{ fontWeight: 600 }}>Login</Typography>
                 <Box
                     sx={{
                         display: "flex",
@@ -71,14 +72,13 @@ const LoginPage = () => {
                         mt: 2,
                     }}
                 >
-                    <TextField inputRef={emailRef} label="Email" name="email"></TextField>
+                    <TextField fullWidth variant="outlined" label="Email" sx={{ mb: 2 }} inputRef={emailRef} name="email"></TextField>
                     <TextField
+                        fullWidth variant="outlined" type="password" label="Password" sx={{ mb: 2 }}
                         inputRef={passwordRef}
-                        type="password"
-                        label="Password"
                         name="password"
                     ></TextField>
-                    <Button onClick={onSubmit} variant="contained">
+                    <Button fullWidth variant="contained" onClick={onSubmit}>
                         Login
                     </Button>
                     {error && <Typography sx={{ color: "red" }}>{error}</Typography>}

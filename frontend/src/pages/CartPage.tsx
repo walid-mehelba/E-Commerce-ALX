@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useCart } from "../context/Cart/CartContext";
 import { useNavigate } from "react-router-dom";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const CartPage = () => {
@@ -30,7 +31,7 @@ const CartPage = () => {
         <Container sx={{ mt: 2 }}>
             <Box display="flex" flexDirection="row" justifyContent="space-between">
                 <Typography variant="h4">My Cart</Typography>
-                <Button onClick={() => clearCart()}>Clear Cart</Button>
+                <Button onClick={() => clearCart()} variant="outlined" startIcon={<DeleteIcon />}>Clear Cart</Button>
             </Box>
             <Box display="flex" flexDirection="column" gap={4} mt={4}>
                 {cartItems.length === 0 ? (
@@ -47,9 +48,11 @@ const CartPage = () => {
                             <Box display={"flex"} flexDirection="row" alignItems="center" gap={2}>
                                 <img src={item.image} width={150} />
                                 <Box>
+
                                     <Typography variant="h5">{item.title}</Typography>
                                     <Typography>{item.quantity} x {item.unitPrice} EGP</Typography>
-                                    <Button onClick={() => handleRemoveItem(item.productId)}>Remove Item</Button>
+                                    <Button startIcon={<DeleteIcon />} onClick={() => handleRemoveItem(item.productId)} sx={{ paddingLeft: 0 }}>Remove Item</Button>
+
                                 </Box>
                             </Box>
                             <ButtonGroup variant="contained" aria-label="Basic button group">

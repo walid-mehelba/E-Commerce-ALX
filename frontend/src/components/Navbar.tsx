@@ -17,7 +17,7 @@ import { ShoppingCart } from "@mui/icons-material";
 import { useCart } from "../context/Cart/CartContext";
 
 function Navbar() {
-   const { username, isAuthenticated, logout } = useAuth();
+  const { email, isAuthenticated, logout } = useAuth();
   const { cartItems } = useCart();
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -37,6 +37,10 @@ function Navbar() {
     navigate("/login");
   };
 
+  const handleRegister = () => {
+    navigate("/register")
+  }
+
   const handeMyOrders = () => {
     navigate("/my-orders");
     handleCloseUserMenu();
@@ -53,9 +57,15 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky"
+      sx={{
+        backgroundColor: "#00296B",
+        backdropFilter: "blur(10px)",
+        color: "#E0E1DD",
+        boxShadow: "0 1px 8px rgba(0,0,0,0.1)",
+      }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar sx={{ justifyContent: "space-between", px: 3 }}>
           <Box
             sx={{
               display: "flex",
@@ -67,7 +77,7 @@ function Navbar() {
           >
             <Button
               variant="text"
-              sx={{ color: "white" }}
+              sx={{ color: "#E0E1DD", fontWeight: 700 }}
               onClick={() => navigate("/")}
             >
               <Box
@@ -109,7 +119,7 @@ function Navbar() {
                   <Grid>
                     <IconButton aria-label="cart" onClick={handleCart}>
                       <Badge badgeContent={cartItems.length} color="secondary">
-                        <ShoppingCart sx={{ color: "white" }} />
+                        <ShoppingCart sx={{ color: "#E0E1DD" }} />
                       </Badge>
                     </IconButton>
                   </Grid>
@@ -121,12 +131,12 @@ function Navbar() {
                       gap={2}
                     >
                       <Grid>
-                        <Typography>{username}</Typography>
+                        <Typography>{email}</Typography>
                       </Grid>
                       <Grid>
                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                           <Avatar
-                            alt={username || ""}
+                            alt={email || ""}
                             src="/static/images/avatar/2.jpg"
                           />
                         </IconButton>
@@ -162,13 +172,20 @@ function Navbar() {
                   </Menu>{" "}
                 </>
               ) : (
-                <Button
-                  variant="contained"
-                  color="success"
-                  onClick={handleLogin}
-                >
-                  Login
-                </Button>
+                <Box display="flex" gap={2}>
+                  <Button
+                    sx={{ color: "#E0E1DD" }}
+                    onClick={handleLogin}
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    sx={{ color: "#E0E1DD" }}
+                    onClick={handleRegister}
+                  >
+                    Register
+                  </Button>
+                </Box>
               )}
             </Box>
           </Box>

@@ -27,15 +27,17 @@ const HomePage = () => {
   }
 
   return (
-    <Container sx={{ mt: 2 }}>
-      <Grid container spacing={2}>
-        {products.map((p) => (
-          <Grid size={4}>
-            <ProductCard {...p} />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <Box sx={{ backgroundColor: "#E0E1DD", minHeight: "100vh" }}>
+      <Container sx={{ mt: 0 }}>
+        <Grid container spacing={2}>
+          {products.map((p) => (
+            <Grid mt={2} mb={2} size={4}>
+              <ProductCard  description={""} {...p} />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </Box>
   );
 };
 

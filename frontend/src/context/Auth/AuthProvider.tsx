@@ -1,11 +1,11 @@
 import { useState, type FC, type PropsWithChildren } from "react";
 import { AuthContext } from "./AuthContext";
 
-const USERNAME_KEY = "username";
+const USERNAME_KEY = "email";
 const TOKEN_KEY = "token";
 
 const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [username, setUsername] = useState<string | null>(
+  const [email, setUsername] = useState<string | null>(
     localStorage.getItem(USERNAME_KEY)
   );
   const [token, setToken] = useState<string | null>(
@@ -16,10 +16,10 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const isAuthenticated = !!token;
 
-  const login = (username: string, token: string) => {
-    setUsername(username);
+  const login = (email: string, token: string) => {
+    setUsername(email);
     setToken(token);
-    localStorage.setItem(USERNAME_KEY, username);
+    localStorage.setItem(USERNAME_KEY, email);
     localStorage.setItem(TOKEN_KEY, token);
   };
 
@@ -47,7 +47,7 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ username, token,myOrders, login, logout, isAuthenticated, getMyOrders }}
+      value={{ email, token, myOrders, login, logout, isAuthenticated, getMyOrders }}
     >
 
       {children}
